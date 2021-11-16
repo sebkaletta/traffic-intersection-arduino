@@ -71,5 +71,8 @@ void loop() {
     }
   }
 
-  trafficLight.loop();
+  trafficLight1.loop();
+  trafficLight2.loop();
+  trafficLight3.loop();
+  trafficLight4.loop();
 }

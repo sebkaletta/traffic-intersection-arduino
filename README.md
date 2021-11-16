@@ -1,6 +1,6 @@
 # traffic-intersection-arduino
 
-#### Small Arduino Project for an Intersection with 4 Traffic Lights, with one of them acting as an emergency access road 
+#### Small Arduino Project for an Intersection with 4 Traffic Lights, with one of them acting simultaneously as an emergency access road 
 
 ### Fuctionality
 ##### Traffic lights will turn green one by one (cycle red - yellow&red - green - yellow - red)

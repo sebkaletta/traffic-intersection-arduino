@@ -168,3 +168,5 @@ private:
   }
  
 };
+
+#endif // _TRAFFIC_LIGHT_H

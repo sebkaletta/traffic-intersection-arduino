@@ -6,8 +6,7 @@
 
 class TrafficLight {
 
-  long TIMER_BLINKING_GREEN = 3000;
-  long TIMER_YELLOW = 2000;
+  long TIMER_YELLOW = 1000;
 
   int _greenLED;
   int _yellowLED;
@@ -15,7 +14,7 @@ class TrafficLight {
 
   enum State {
     GREEN,
-    BLINKING_GREEN,
+    REDYELLOW,
     YELLOW,
     RED
   };
@@ -37,6 +36,15 @@ public:
     pinMode(_yellowLED, OUTPUT);
     pinMode(_redLED, OUTPUT);
   
+  }
+
+
+  bool stopped(){
+    if (_currentState == RED){
+      return true; 
+    } else {
+      return false;
+    }
   }
 
   void go() {
@@ -62,7 +70,7 @@ public:
     digitalWrite(_greenLED, HIGH);
     digitalWrite(_yellowLED, HIGH);
     digitalWrite(_redLED, HIGH);
-    delay(2000)
+    delay(2000);
     digitalWrite(_greenLED, LOW);
     digitalWrite(_yellowLED, LOW);
     digitalWrite(_redLED, LOW);
@@ -99,11 +107,11 @@ private:
 
   void goToGreen() {
     // red
-    // yellow
+    // redyellow
     // green     
     switch (_currentState) {
       case RED:
-        _currentState = YELLOW;
+        _currentState = REDYELLOW;
         timer.startTimer(TIMER_YELLOW);
         break;
 
@@ -114,8 +122,11 @@ private:
         }
         break;
 
-      case BLINKING_GREEN:
-        _currentState = GREEN;
+      case REDYELLOW:
+        redYellow();
+        if (timer.isTimerReady()) {
+          _currentState = GREEN;
+        }
         break;
 
       case GREEN:
@@ -127,27 +138,28 @@ private:
 
   void goToRed() {
     // green
-    // blikin green
     // yellow
     // red
     switch (_currentState) {
       case GREEN:
-        _currentState = BLINKING_GREEN;
-        timer.startTimer(TIMER_BLINKING_GREEN);
+        _currentState = YELLOW;
+        timer.startTimer(TIMER_YELLOW);
         break;
-      case BLINKING_GREEN:
-        blinkGreen();
+        
+      case REDYELLOW:
+        redYellow();
         if (timer.isTimerReady()) {
-          _currentState = YELLOW;
-          timer.startTimer(TIMER_YELLOW);
+          _currentState = RED;
         }
         break;
+        
       case YELLOW:
         yellow();
         if (timer.isTimerReady()) {
           _currentState = RED;
         }
         break;
+        
       case RED:
         red();
         break;

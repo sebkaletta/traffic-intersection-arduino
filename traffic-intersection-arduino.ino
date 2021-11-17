@@ -34,6 +34,9 @@ Button button(PIN_BUTTON);
 Door door(PIN_DOOR);
 
 Timer timer;
+Timer cycleTimer;
+
+int i=1;
   
 
 void setup() {
@@ -46,49 +49,55 @@ void setup() {
 void loop() {
   if (button.isPressed()) {
     emergency();
-    timer.startTimer(1000);
+    timer.startTimer(30000);
   } else {
-    if (timer.isTimerReady()) {
-      normalCycle();
-    }
+      if (timer.isTimerReady() && cycleTimer.isTimerReady()) {
+        stopLights();
+        if (trafficLight1.stopped() && trafficLight2.stopped() && trafficLight3.stopped() && trafficLight4.stopped()){
+          normalCycle(i);
+          cycleTimer.startTimer(10000);
+          if (i==4){
+            i=1;
+          } else {
+            i++;
+          }
+        }
+      }
   }
+
+  trafficLight1.loop();
+  trafficLight2.loop();
+  trafficLight3.loop();
+  trafficLight4.loop();
+  
 }
 
-void normalCycle(){
-  trafficLight1.go();
-  trafficLight1.loop();
-  delay(8000);
+void stopLights(){
   trafficLight1.stop();
-  trafficLight1.loop();
-  trafficLight2.go();
-  trafficLight2.loop();
-  delay(8000);
   trafficLight2.stop();
-  trafficLight2.loop();
-  trafficLight3.go();
-  trafficLight3.loop();
-  delay(8000);
   trafficLight3.stop();
-  trafficLight3.loop();
-  trafficLight4.go();
-  trafficLight4.loop();
-  delay(8000);
   trafficLight4.stop();
-  trafficLight4.loop();
+}
+
+void normalCycle(int iter){
+  switch (iter){
+    case 1:
+      trafficLight1.go();
+    case 2:
+      trafficLight2.go();
+    case 3:
+      trafficLight3.go();
+    case 4:
+      trafficLight4.go();  
+  }
 }
 
 void emergency(){
   trafficLight1.stop();
-  trafficLight1.loop();
   trafficLight2.stop();
-  trafficLight2.loop();
   trafficLight3.stop();
-  trafficLight3.loop();
   trafficLight4.go();
-  trafficLight4.loop();
   door.openDoor();
   delay(20000);
   door.closeDoor();
-  trafficLight4.stop();
-  trafficLight4.loop();
 }

@@ -45,34 +45,50 @@ void setup() {
 
 void loop() {
   if (button.isPressed()) {
-    trafficLight1.stop();
-    trafficLight2.stop();
-    trafficLight3.stop();
-    trafficLight4.go();
-    door.openDoor();
-    delay(20000);
-    door.closeDoor();
-    trafficLight4.stop()
+    emergency();
     timer.startTimer(1000);
   } else {
     if (timer.isTimerReady()) {
-      trafficLight1.go();
-      delay(8000);
-      trafficLight1.stop();
-      trafficLight2.go();
-      delay(8000);
-      trafficLight2.stop();
-      trafficLight3.go();
-      delay(8000);
-      trafficLight3.stop();
-      trafficLight4.go();
-      delay(8000);
-      trafficLight4.stop();
+      normalCycle();
     }
   }
+}
 
+void normalCycle(){
+  trafficLight1.go();
   trafficLight1.loop();
+  delay(8000);
+  trafficLight1.stop();
+  trafficLight1.loop();
+  trafficLight2.go();
   trafficLight2.loop();
+  delay(8000);
+  trafficLight2.stop();
+  trafficLight2.loop();
+  trafficLight3.go();
   trafficLight3.loop();
+  delay(8000);
+  trafficLight3.stop();
+  trafficLight3.loop();
+  trafficLight4.go();
+  trafficLight4.loop();
+  delay(8000);
+  trafficLight4.stop();
+  trafficLight4.loop();
+}
+
+void emergency(){
+  trafficLight1.stop();
+  trafficLight1.loop();
+  trafficLight2.stop();
+  trafficLight2.loop();
+  trafficLight3.stop();
+  trafficLight3.loop();
+  trafficLight4.go();
+  trafficLight4.loop();
+  door.openDoor();
+  delay(20000);
+  door.closeDoor();
+  trafficLight4.stop();
   trafficLight4.loop();
 }

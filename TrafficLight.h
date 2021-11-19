@@ -27,7 +27,7 @@ class TrafficLight {
 
 
 public:
-  TrafficLight(int greenLED, int yellowLED, int redLED){
+  TrafficLight(int redLED, int yellowLED, int greenLED){
     _greenLED = greenLED;
     _yellowLED = yellowLED;
     _redLED = redLED;

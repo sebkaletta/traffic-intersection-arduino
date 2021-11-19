@@ -20,12 +20,12 @@ int A4R = 9;
 int A4Y = 10;
 int A4G = 11;
 
-int PIN_BUTTON = 12;
-int PIN_DOOR = 13;
-int PIN_DOOR_GL1 = 14;
-int PIN_DOOR_GL2 = 15;
-int PIN_DOOR_YL1 = 16;
-int PIN_DOOR_YL2 = 17;
+int PIN_BUTTON = 24;
+int PIN_DOOR = 25;
+int PIN_DOOR_GL1 = 26;
+int PIN_DOOR_GL2 = 27;
+int PIN_DOOR_YL1 = 28;
+int PIN_DOOR_YL2 = 29;
 
 
 TrafficLight trafficLight1(A1R, A1Y, A1G);

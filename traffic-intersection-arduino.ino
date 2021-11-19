@@ -17,11 +17,15 @@ int A3Y = 7;
 int A3G = 8;
   
 int A4R = 9;
-int A4Y = 12;
-int A4G = 13;
+int A4Y = 10;
+int A4G = 11;
 
-int PIN_BUTTON = 11;
-int PIN_DOOR = 10;
+int PIN_BUTTON = 12;
+int PIN_DOOR = 13;
+int PIN_DOOR_GL1 = 14;
+int PIN_DOOR_GL2 = 15;
+int PIN_DOOR_YL1 = 16;
+int PIN_DOOR_YL2 = 17;
 
 
 TrafficLight trafficLight1(A1R, A1Y, A1G);
@@ -31,7 +35,7 @@ TrafficLight trafficLight4(A4R, A4Y, A4G);
 
 Button button(PIN_BUTTON);
 
-Door door(PIN_DOOR);
+Door door(PIN_DOOR, PIN_DOOR_GL1, PIN_DOOR_GL2, PIN_DOOR_YL1, PIN_DOOR_YL2);
 
 Timer timer;
 Timer cycleTimer;
@@ -51,7 +55,7 @@ void setup() {
 
 void loop() {
   if (button.isPressed()) {
-    trafficLight1.stop();
+    trafficLight1.stop();         // Set Status of TL1 to CLOSED
     trafficLight2.stop();
     trafficLight3.stop();
     trafficLight4.go();

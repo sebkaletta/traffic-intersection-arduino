@@ -58,7 +58,7 @@ public:
   }
 
   bool doorIsClosed(){
-    if (_currentState = CLOSED){
+    if (_currentState == CLOSED){
       return true;
     } else {
       return false;
@@ -138,7 +138,7 @@ private:
 
 
   void greenLight(){
-    if (_currentState = OPEN){
+    if (_currentState == OPEN){
       digitalWrite(_gl1Pin, HIGH);
       digitalWrite(_gl2Pin, HIGH);
     } else {
@@ -149,7 +149,7 @@ private:
   }
   
   void yellowLight(){
-    if (ylOn = 0){
+    if (ylOn == 0){
       digitalWrite(_yl1Pin, HIGH);
       digitalWrite(_yl2Pin, HIGH);
       ylOn = 1;

@@ -42,18 +42,6 @@ public:
     pinMode(_gl2Pin, OUTPUT);
     pinMode(_yl1Pin, OUTPUT);
     pinMode(_yl2Pin, OUTPUT);
-
-
-    digitalWrite(_gl1Pin, HIGH);
-    digitalWrite(_gl2Pin, HIGH);
-    digitalWrite(_yl1Pin, HIGH);
-    digitalWrite(_yl2Pin, HIGH);
-    delay(1000);
-    digitalWrite(_gl1Pin, LOW);
-    digitalWrite(_gl2Pin, LOW);
-    digitalWrite(_yl1Pin, LOW);
-    digitalWrite(_yl2Pin, LOW);
-
     
   }
 
@@ -128,7 +116,7 @@ private:
       digitalWrite(_yl1Pin, LOW);
       digitalWrite(_yl2Pin, LOW);
       
-      _currentState = OPEN;
+      _currentState = CLOSED;
     }
     
     greenLight();

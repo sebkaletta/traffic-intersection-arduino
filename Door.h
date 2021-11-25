@@ -126,7 +126,7 @@ private:
 
 
   void greenLight(){
-    if (_currentState == OPEN){
+    if (myservo.read() == 180){
       digitalWrite(_gl1Pin, HIGH);
       digitalWrite(_gl2Pin, HIGH);
     } else {

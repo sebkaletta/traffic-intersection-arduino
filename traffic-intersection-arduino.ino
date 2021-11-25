@@ -27,6 +27,12 @@ int PIN_DOOR_GL2 = 27;
 int PIN_DOOR_YL1 = 28;
 int PIN_DOOR_YL2 = 29;
 
+enum State {
+    NORMAL,
+    EMERGENCY,
+  };
+
+State intersectState = EMERGENCY;
 
 TrafficLight trafficLight1(A1R, A1Y, A1G);
 TrafficLight trafficLight2(A2R, A2Y, A2G);
@@ -58,13 +64,14 @@ void loop() {
     trafficLight1.stop();         // Set Status of TL1 to CLOSED
     trafficLight2.stop();
     trafficLight3.stop();
-    trafficLight4.go();
+    intersectState = EMERGENCY;
     door.open();
     timer.startTimer(TIMER_EMERGENCY);
   } else {
     if (timer.isTimerReady() && cycleTimer.isTimerReady()) {
       door.close();
       stopLights();
+      intersectState = NORMAL;
       if (door.doorIsClosed() && trafficLight1.stopped() && trafficLight2.stopped() && trafficLight3.stopped() && trafficLight4.stopped()) {
         normalCycle(i);
         cycleTimer.startTimer(TIMER_NORMALCYCLE);
@@ -75,6 +82,10 @@ void loop() {
         }
       }
     }
+  }
+  
+  if (intersectState == EMERGENCY && trafficLight1.stopped() && trafficLight2.stopped() && trafficLight3.stopped()) {
+    trafficLight4.go();
   }
 
   trafficLight1.loop();

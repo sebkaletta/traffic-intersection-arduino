@@ -1,4 +1,5 @@
 #include <Servo.h>
+#include "Timer.h"
 
 
 #ifndef _DOOR_H

@@ -31,8 +31,8 @@ class Door {
 
 public:
   Door(int doorPin, int gl1Pin, int gl2Pin, int yl1Pin, int yl2Pin){
-    myservo.attach(doorPin);
-    myservo.write(0);
+    _doorPin = doorPin;
+    
 
     _gl1Pin = gl1Pin;
     _gl2Pin = gl2Pin;
@@ -44,6 +44,11 @@ public:
     pinMode(_yl1Pin, OUTPUT);
     pinMode(_yl2Pin, OUTPUT);
     
+  }
+  
+  void setup(){
+    myservo.attach(_doorPin);
+    myservo.write(0);
   }
 
   bool doorIsClosed(){

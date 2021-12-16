@@ -57,6 +57,7 @@ void setup() {
   trafficLight2.initTest();
   trafficLight3.initTest();
   trafficLight4.initTest();
+  door.setup();
 }
 
 void loop() {
